@@ -1,8 +1,28 @@
 # "SWR 2.0 with Preload and Optimistic UI"
 
+This repository contains a small project that implements SWR 2.0 and optimistic updates.
+This code is the result of following this [YouTube Video](https://youtu.be/6gb6oyO1Tyg).
+Instead of using JavaScript, all files are now written in TypeScript.
+In this branch I used the simple `populateCache: true` option.
+Checkout the main branch to view a better implementation of populateCache.
+
+## Getting Started
+
+**Start local server**
+
+```bash
+npx json-server -w data/db.json -p 3500
+```
+
+**Start vite**
+
+```bash
+npm run dev
+```
+
 ---
 
-### Author Links
+## Original Author Links
 
 👋 Hello, I'm Dave Gray.
 
