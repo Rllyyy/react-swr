@@ -4,16 +4,9 @@ import { faTrash, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import useSWR from "swr";
 
-import { getTodos, todosUrlEndpoint as cacheKey } from "../../api/todosApi";
+import { getTodos, addTodo, deleteTodo, updateTodo, todosUrlEndpoint as cacheKey } from "../../api/todosApi";
 
-import {
-  addMutation as addTodo,
-  addTodoOptions,
-  updateMutation as updateTodo,
-  updateTodoOptions,
-  deleteMutation as deleteTodo,
-  deleteTodoOptions,
-} from "../../helpers/todosMutation";
+import { addTodoOptions, deleteTodoOptions, updateTodoOptions } from "../../api/todosSWROptions";
 
 export interface ITodo {
   userId: number;
@@ -38,7 +31,7 @@ const TodoList = () => {
   const addTodoMutation = async (newTodo: ITodo) => {
     try {
       // call API & mutate here
-      await mutate(addTodo(newTodo, todos), addTodoOptions(newTodo, todos));
+      await mutate(addTodo(newTodo), addTodoOptions(newTodo));
 
       toast.success("Success! Added new item.", {
         duration: 1000,
@@ -53,7 +46,7 @@ const TodoList = () => {
 
   const updateTodoMutation = async (updatedTodo: ITodo) => {
     try {
-      await mutate(updateTodo(updatedTodo, todos), updateTodoOptions(updatedTodo, todos));
+      await mutate(updateTodo(updatedTodo), updateTodoOptions(updatedTodo));
 
       toast.success("Success! Updated item.", {
         duration: 1000,
@@ -68,7 +61,7 @@ const TodoList = () => {
 
   const deleteTodoMutation = async ({ id }: { id: ITodo["id"] }) => {
     try {
-      await mutate(deleteTodo(id, todos), deleteTodoOptions(id, todos));
+      await mutate(deleteTodo({ id }), deleteTodoOptions({ id }));
 
       toast.success("Success! Deleted item.", {
         duration: 1000,

@@ -15,13 +15,14 @@ export const getTodos = async () => {
   return response.data;
 };
 
-export const addTodo = async ({ userId, title, completed }: ITodo) => {
+export const addTodo = async ({ userId, title, completed }: ITodo): Promise<any> => {
   await delay();
   const response = await todosApi.post(todosUrlEndpoint, { userId, title, completed });
+  console.log(response.data);
   return response.data;
 };
 
-export const updateTodo = async (todo: ITodo): Promise<ITodo> => {
+export const updateTodo = async (todo: ITodo): Promise<any> => {
   await delay();
   const response = await todosApi.patch(`${todosUrlEndpoint}/${todo.id}`, todo);
   return response.data;
